@@ -1,0 +1,113 @@
+version: "3.7"
+
+services:
+    caddy:
+        image: caddy:latest
+        container_name: caddy
+        restart: unless-stopped
+        security_opt:
+            - no-new-privileges:true
+        ports:
+            - "80:80"
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "./etc/caddy/data:/data"
+            - "./etc/caddy/config:/config"
+            - "./etc/caddy/sites:/data/caddy/sites"
+            - "./etc/caddy/Caddyfile:/etc/caddy/Caddyfile"
+        networks:
+            - caddy-net
+        depends_on:
+            - pihole
+            - monitorix
+
+    pihole:
+        image: pihole/pihole:latest
+        container_name: pihole
+        restart: unless-stopped
+        ports:
+            - "53:53/tcp"
+            - "53:53/udp"
+            - "67:67/udp"
+        expose:
+            - "80:80"
+        environment:
+            TZ: "Asia/Hong_Kong"
+            WEBPASSWORD: "${WEB_PASSWORD}"
+            DNS1: "dnscrypt#5053"
+            DNS2: ""
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "./etc/pihole:/etc/pihole"
+            - "./etc/dnsmasq.d:/etc/dnsmasq.d"
+        dns:
+            - 1.1.1.1
+        networks:
+            - caddy-net
+            - pihole-net
+        depends_on:
+            - dnscrypt_proxy
+
+    dnscrypt_proxy:
+        image: klutchell/dnscrypt-proxy:latest
+        container_name: dnscrypt_proxy
+        restart: unless-stopped
+        expose:
+            - "5053:5053/udp"
+            - "5053:5053/tcp"
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "./etc/dnscrypt-proxy/config:/config"
+        networks:
+            - pihole-net
+
+    coredns:
+        image: coredns/coredns:latest
+        container_name: coredns
+        restart: unless-stopped
+        command: "-conf /etc/coredns/Corefile"
+        ports:
+            - "853:853/tcp"
+            - "853:853/udp"
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "./etc/coredns:/etc/coredns"
+        networks:
+            - pihole-net
+        depends_on:
+            - pihole
+
+    monitorix:
+        image: beartums/rpi-monitorix:latest
+        container_name: monitorix
+        restart: unless-stopped
+        devices:
+            - "/dev/vchiq:/dev/vchiq"
+        environment:
+            MONITORIX_HOSTNAME: "pihole"
+            TITLE: "Pi-Hole Status"
+            REFRESH_RATE: 150
+            TEMPERATURE_SCALE: "c"
+            HTTPD-GROUP: "www-data"
+            GRAPHS: "system,raspberrypi,kern,proc,process,int,serv,net"
+        expose:
+            - "8080:8080"
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "./etc/monitorix/conf.d:/etc/monitorix/conf.d"
+            - "/path/to/folder/containing/assets/to/copy/to/www-root/:/assets"
+        networks:
+            - caddy-net
+            - pihole-net
+
+networks:
+    caddy-net:
+        name: caddy-net
+        external: true
+    pihole-net:
+        name: pihole-net
