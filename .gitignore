@@ -2,7 +2,6 @@
 /etc/caddy/data
 /etc/dnsmasq.d
 /etc/monitorix/assets
-/etc/monitorix/conf.d
 /etc/pihole
 
 .env
