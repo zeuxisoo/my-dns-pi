@@ -3,3 +3,5 @@
 /etc/dnsmasq.d
 /etc/monitorix/conf.d
 /etc/pihole
+
+.env
