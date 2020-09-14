@@ -1,0 +1,5 @@
+/etc/caddy/config
+/etc/caddy/data
+/etc/dnsmasq.d
+/etc/monitorix/conf.d
+/etc/pihole
