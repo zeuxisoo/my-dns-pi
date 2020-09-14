@@ -86,6 +86,7 @@ services:
             pihole-net:
                 ipv4_address: 172.28.241.2
         depends_on:
+            - caddy
             - pihole
 
     monitorix:
