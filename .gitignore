@@ -3,8 +3,6 @@
 /etc/dnsmasq.d
 /etc/monitorix/assets
 /etc/monitorix/conf.d
-/etc/monitorix/lib
-/etc/monitorix/lib/www
 /etc/pihole
 
 .env

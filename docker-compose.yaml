@@ -106,8 +106,6 @@ services:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
             - "./etc/monitorix/conf.d:/etc/monitorix/conf.d"
-            - "./etc/monitorix/lib:/var/lib/monitorix"
-            - "./etc/monitorix/lib/www:/var/lib/monitorix/lib/www"
             - "./etc/monitorix/assets:/assets"
         networks:
             caddy-net:
