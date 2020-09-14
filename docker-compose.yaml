@@ -14,7 +14,7 @@ services:
             - "/etc/localtime:/etc/localtime:ro"
             - "./etc/caddy/data:/data"
             - "./etc/caddy/config:/config"
-            - "./etc/caddy/sites:/data/caddy/sites"
+            - "./etc/caddy/sites:/etc/caddy/sites"
             - "./etc/caddy/Caddyfile:/etc/caddy/Caddyfile"
         networks:
             - caddy-net
