@@ -31,7 +31,7 @@ services:
             - "53:53/udp"
             - "67:67/udp"
         expose:
-            - "80:80"
+            - "80"
         environment:
             TZ: "Asia/Hong_Kong"
             WEBPASSWORD: "${WEB_PASSWORD}"
@@ -55,8 +55,8 @@ services:
         container_name: dnscrypt_proxy
         restart: unless-stopped
         expose:
-            - "5053:5053/udp"
-            - "5053:5053/tcp"
+            - "5053/udp"
+            - "5053/tcp"
         volumes:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
@@ -95,7 +95,7 @@ services:
             HTTPD-GROUP: "www-data"
             GRAPHS: "system,raspberrypi,kern,proc,process,int,serv,net"
         expose:
-            - "8080:8080"
+            - "8080"
         volumes:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
