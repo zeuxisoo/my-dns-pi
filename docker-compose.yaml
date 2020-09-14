@@ -35,7 +35,7 @@ services:
         environment:
             TZ: "Asia/Hong_Kong"
             WEBPASSWORD: "${WEB_PASSWORD}"
-            DNS1: "dnscrypt#5053"
+            DNS1: "dnscrypt_proxy#5053"
             DNS2: ""
         volumes:
             - "/etc/timezone:/etc/timezone:ro"
