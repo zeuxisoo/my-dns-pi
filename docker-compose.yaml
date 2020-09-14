@@ -106,7 +106,7 @@ services:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
             - "./etc/monitorix/conf.d:/etc/monitorix/conf.d"
-            - "/path/to/folder/containing/assets/to/copy/to/www-root/:/assets"
+            - "./etc/monitorix/assets:/assets"
         networks:
             caddy-net:
                 ipv4_address: 172.28.240.8
