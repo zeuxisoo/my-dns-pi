@@ -113,6 +113,9 @@ services:
                 ipv4_address: 172.28.240.8
             pihole-net:
                 ipv4_address: 172.28.241.8
+        # Enable iptables command
+        cap_add:
+            - NET_ADMIN
 
 networks:
     caddy-net:
