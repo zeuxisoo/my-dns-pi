@@ -17,7 +17,8 @@ services:
             - "./etc/caddy/sites:/etc/caddy/sites"
             - "./etc/caddy/Caddyfile:/etc/caddy/Caddyfile"
         networks:
-            - caddy-net
+            caddy-net:
+                ipv4_address: 172.28.240.1
         depends_on:
             - pihole
             - monitorix
@@ -35,8 +36,8 @@ services:
         environment:
             TZ: "Asia/Hong_Kong"
             WEBPASSWORD: "${WEB_PASSWORD}"
-            DNS1: "dnscrypt_proxy#5053"
-            DNS2: ""
+            DNS1: "172.28.241.10#5053"
+            DNS2: "172.28.241.10#5053"
         volumes:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
@@ -45,8 +46,10 @@ services:
         dns:
             - 1.1.1.1
         networks:
-            - caddy-net
-            - pihole-net
+            caddy-net:
+                ipv4_address: 172.28.240.5
+            pihole-net:
+                ipv4_address: 172.28.241.5
         depends_on:
             - dnscrypt_proxy
 
@@ -62,7 +65,8 @@ services:
             - "/etc/localtime:/etc/localtime:ro"
             - "./etc/dnscrypt-proxy/config:/config"
         networks:
-            - pihole-net
+            pihole-net:
+                ipv4_address: 172.28.241.10
 
     coredns:
         image: coredns/coredns:latest
@@ -77,7 +81,8 @@ services:
             - "/etc/localtime:/etc/localtime:ro"
             - "./etc/coredns:/etc/coredns"
         networks:
-            - pihole-net
+            pihole-net:
+                ipv4_address: 172.28.241.1
         depends_on:
             - pihole
 
@@ -102,12 +107,21 @@ services:
             - "./etc/monitorix/conf.d:/etc/monitorix/conf.d"
             - "/path/to/folder/containing/assets/to/copy/to/www-root/:/assets"
         networks:
-            - caddy-net
-            - pihole-net
+            caddy-net:
+                ipv4_address: 172.28.240.15
+            pihole-net:
+                ipv4_address: 172.28.241.15
 
 networks:
     caddy-net:
         name: caddy-net
         external: true
+        ipam:
+            config:
+                - subnet: 172.28.240.0/24
+
     pihole-net:
         name: pihole-net
+        ipam:
+            config:
+                - subnet: 172.28.241.0/24
