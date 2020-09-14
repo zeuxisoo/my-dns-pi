@@ -1,0 +1,5 @@
+dot.domain {
+    tls {
+        dns cloudflare AUTH_TOKEN
+    }
+}

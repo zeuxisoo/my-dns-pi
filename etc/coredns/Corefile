@@ -1,4 +1,0 @@
-tls://.:853 {
-  tls /etc/coredns/cert.crt /etc/coredns/cert.key
-    forward . pihole:53
-}
