@@ -94,7 +94,7 @@ services:
         devices:
             - "/dev/vchiq:/dev/vchiq"
         environment:
-            MONITORIX_HOSTNAME: "pihole"
+            MONITORIX_HOSTNAME: "pi-hole"
             TITLE: "Pi-Hole Status"
             REFRESH_RATE: 150
             TEMPERATURE_SCALE: "c"
