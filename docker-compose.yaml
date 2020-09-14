@@ -81,6 +81,7 @@ services:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
             - "./etc/coredns:/etc/coredns"
+            - "./etc/caddy/data:/etc/coredns/data"
         networks:
             pihole-net:
                 ipv4_address: 172.28.241.2
