@@ -1,0 +1,10 @@
+FROM coredns/coredns:latest AS orignal
+
+
+FROM alpine:latest
+
+COPY --from=orignal /etc/ssl/certs /etc/ssl/certs
+COYP --from=orignal /coredns /coredns
+
+EXPOSE 53 53/udp
+ENTRYPOINT ["/coredns"]
