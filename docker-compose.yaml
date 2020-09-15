@@ -27,6 +27,7 @@ services:
     pihole:
         image: pihole/pihole:latest
         container_name: pihole
+        hostname: pihole
         restart: unless-stopped
         ports:
             - "53:53/tcp"
