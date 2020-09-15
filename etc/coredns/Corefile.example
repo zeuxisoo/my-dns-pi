@@ -1,4 +1,9 @@
 tls://.:853 {
+    errors
+    log . {
+        class denial
+        class success
+    }
     tls /data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/dot.domain/dot.domain.crt /data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/dot.domain/dot.domain.key
     forward . 172.28.241.4:53
 }
