@@ -39,6 +39,9 @@ services:
             WEBPASSWORD: "${WEB_PASSWORD}"
             DNS1: "172.28.241.6#5053"
             DNS2: "172.28.241.6#5053"
+            # Listen on all local subnets not only eth0 only
+            # - https://github.com/pi-hole/docker-pi-hole#environment-variables
+            DNSMASQ_LISTENING: "local"
         volumes:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
