@@ -40,8 +40,15 @@ services:
             WEBPASSWORD: "${WEB_PASSWORD}"
             DNS1: "172.28.241.6#5053"
             DNS2: "172.28.241.6#5053"
-            # Listen on all local subnets not only eth0 only
+            # Change the default listen eth0 to eth1
+            # Listen on all local subnets not only eth1
             # - https://github.com/pi-hole/docker-pi-hole#environment-variables
+            #
+            # In development stage, caddy-net at eth0, pihole-net at eth1
+            # May need to change when deploy, find interface binding by command:
+            # (When changed this file, you must recreate the pihole service)
+            # - sudo docker exec -it pihole ip addr show
+            INTERFACE: "eth1"
             DNSMASQ_LISTENING: "local"
             DNSMASQ_USER: "pihole"
         volumes:
