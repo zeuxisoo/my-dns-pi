@@ -32,7 +32,8 @@ services:
         ports:
             - "53:53/tcp"
             - "53:53/udp"
-            - "67:67/udp"
+            # Disable the DHCP service port binding
+            #- "67:67/udp"
         expose:
             - "80"
         environment:
