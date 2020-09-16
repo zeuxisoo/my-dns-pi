@@ -43,6 +43,7 @@ services:
             # Listen on all local subnets not only eth0 only
             # - https://github.com/pi-hole/docker-pi-hole#environment-variables
             DNSMASQ_LISTENING: "local"
+            DNSMASQ_USER: "pihole"
         volumes:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
