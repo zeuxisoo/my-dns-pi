@@ -3,5 +3,6 @@
 /etc/dnsmasq.d
 /etc/monitorix/assets
 /etc/pihole
+/etc/prometheus/data
 
 .env
