@@ -184,8 +184,8 @@ services:
         restart: unless-stopped
         command:
             - '--path.procfs=/host/proc'
-            - '--path.rootfs=/rootfs'
             - '--path.sysfs=/host/sys'
+            - '--path.rootfs=/rootfs'
             - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc|home/.+)($$|/)'
         expose:
             - "9100"
