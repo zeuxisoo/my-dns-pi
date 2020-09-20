@@ -6,6 +6,7 @@ Deploy my dns service into my raspberry pi 4B
 
     sudo docker network create caddy-net --subnet=172.28.240.0/24
     sudo docker network create pihole-net --subnet=172.28.241.0/24
+    sudo docker network create monitor-net --subnet=127.28.242.0/24
 
 ## Remove all docker images
 

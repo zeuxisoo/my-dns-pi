@@ -132,6 +132,71 @@ services:
         cap_add:
             - NET_ADMIN
 
+    prometheus:
+        image: prom/prometheus:latest
+        container_name: prometheus
+        restart: unless-stopped
+        command:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/etc/prometheus/data"
+            - "--storage.tsdb.retention.time=15d"
+            - "--web.console.libraries=/etc/prometheus/console_libraries"
+            - "--web.console.templates=/etc/prometheus/consoles"
+            - "--web.enable-lifecycle"
+        expose:
+            - "9090"
+        volumes:
+            - "./etc/prometheus/conf/prometheus.yml:/etc/prometheus/conf/prometheus.yml:ro"
+            - "./etc/prometheus/data:/etc/prometheus/data"
+        networks:
+            caddy-net:
+                ipv4_address: 172.28.240.10
+            pihole-net:
+                ipv4_address: 172.28.241.10
+            monitor-net:
+                ipv4_address: 127.28.242.2
+        depends_on:
+            - cadvisor
+            - node_exporter
+
+    cadvisor:
+        image: gcr.io/cadvisor/cadvisor:v0.37.0
+        container_name: cadvisor
+        restart: unless-stopped
+        privileged: true
+        devices:
+            - "/dev/kmsg:/dev/kmsg"
+        expose:
+            - "8080"
+        volumes:
+            - "/:/rootfs:ro"
+            - "/var/run:/var/run:ro"
+            - "/sys:/sys:ro"
+            - "/var/lib/docker/:/var/lib/docker:ro"
+            - "/dev/disk/:/dev/disk:ro"
+        networks:
+            monitor-net:
+                ipv4_address: 127.28.242.4
+
+    node_exporter:
+        image: prom/node-exporter:v1.0.1
+        container_name: nodeexporter
+        restart: unless-stopped
+        command:
+            - '--path.procfs=/host/proc'
+            - '--path.rootfs=/rootfs'
+            - '--path.sysfs=/host/sys'
+            - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc|home/.+)($$|/)'
+        expose:
+            - "9100"
+        volumes:
+            - "/proc:/host/proc:ro"
+            - "/sys:/host/sys:ro"
+            - "/:/rootfs:ro"
+        networks:
+            monitor-net:
+                ipv4_address: 127.28.242.6
+
 networks:
     caddy-net:
         name: caddy-net
@@ -145,3 +210,9 @@ networks:
         ipam:
             config:
                 - subnet: 172.28.241.0/24
+
+    monitor-net:
+        name: monitor-net
+        ipam:
+            config:
+                - subnet: 127.28.242.0/24
