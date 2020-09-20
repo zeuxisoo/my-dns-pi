@@ -154,7 +154,7 @@ services:
             pihole-net:
                 ipv4_address: 172.28.241.10
             monitor-net:
-                ipv4_address: 127.28.242.2
+                ipv4_address: 172.28.242.2
         depends_on:
             - cadvisor
             - node_exporter
@@ -176,7 +176,7 @@ services:
             - "/dev/disk/:/dev/disk:ro"
         networks:
             monitor-net:
-                ipv4_address: 127.28.242.4
+                ipv4_address: 172.28.242.4
 
     node_exporter:
         image: prom/node-exporter:v1.0.1
@@ -195,7 +195,7 @@ services:
             - "/:/rootfs:ro"
         networks:
             monitor-net:
-                ipv4_address: 127.28.242.6
+                ipv4_address: 172.28.242.6
 
 networks:
     caddy-net:
