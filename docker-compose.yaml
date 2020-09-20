@@ -215,4 +215,4 @@ networks:
         name: monitor-net
         ipam:
             config:
-                - subnet: 127.28.242.0/24
+                - subnet: 172.28.242.0/24
