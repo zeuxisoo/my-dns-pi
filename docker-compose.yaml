@@ -137,7 +137,7 @@ services:
         container_name: prometheus
         restart: unless-stopped
         command:
-            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--config.file=/etc/prometheus/conf/prometheus.yml"
             - "--storage.tsdb.path=/etc/prometheus/data"
             - "--storage.tsdb.retention.time=15d"
             - "--web.console.libraries=/etc/prometheus/console_libraries"
