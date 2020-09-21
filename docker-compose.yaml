@@ -222,6 +222,21 @@ services:
             monitor-net:
                 ipv4_address: 172.28.242.8
 
+    rpi_exporter:
+        image: carlosedp/arm_exporter:latest
+        container_name: rpi_exporter
+        restart: unless-stopped
+        command:
+            - '--collector.textfile.directory=/etc/rpi_exporter/'
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+        expose:
+            - "9243"
+        networks:
+            monitor-net:
+                ipv4_address: 172.28.242.10
+
 networks:
     caddy-net:
         name: caddy-net
