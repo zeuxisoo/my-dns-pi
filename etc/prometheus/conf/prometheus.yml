@@ -17,3 +17,8 @@ scrape_configs:
       scrape_interval: 1m
       static_configs:
         - targets: ['node_exporter:9100']
+
+    - job_name: 'coredns'
+      scrape_interval: 1m
+      static_configs:
+        - targets: ['coredns:9253']

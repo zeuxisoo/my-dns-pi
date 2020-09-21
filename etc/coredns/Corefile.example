@@ -4,6 +4,7 @@ tls://.:853 {
         class denial
         class success
     }
+    prometheus coredns:9253
     tls /data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/dot.domain/dot.domain.crt /data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/dot.domain/dot.domain.key
     forward . 172.28.241.4:53
 }

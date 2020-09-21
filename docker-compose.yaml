@@ -89,6 +89,8 @@ services:
         ports:
             - "853:853/tcp"
             - "853:853/udp"
+        expose:
+            - "9253"
         volumes:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
