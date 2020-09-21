@@ -231,6 +231,7 @@ services:
         command:
             - '--collector.textfile.directory=/etc/rpi_exporter/'
         volumes:
+            - "/etc/hostname:/etc/nodename:ro"
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
         expose:
