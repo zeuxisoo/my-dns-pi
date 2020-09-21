@@ -226,6 +226,8 @@ services:
         image: carlosedp/arm_exporter:latest
         container_name: rpi_exporter
         restart: unless-stopped
+        environment:
+            NODE_ID: "{{.Node.ID}}"
         command:
             - '--collector.textfile.directory=/etc/rpi_exporter/'
         volumes:
