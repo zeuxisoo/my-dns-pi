@@ -206,7 +206,7 @@ services:
                 ipv4_address: 172.28.242.6
 
     pihole_exporter:
-        image: ekofr/pihole-exporter:latest
+        image: ekofr/pihole-exporter:0.0.9
         container_name: pihole_exporter
         restart: unless-stopped
         environment:
