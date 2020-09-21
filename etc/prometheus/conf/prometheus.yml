@@ -18,6 +18,11 @@ scrape_configs:
       static_configs:
         - targets: ['node_exporter:9100']
 
+    - job_name: 'pihole_exporter'
+      scrape_interval: 35s
+      static_configs:
+        - targets: ['pihole_exporter:9617']
+
     - job_name: 'coredns'
       scrape_interval: 15s
       static_configs:

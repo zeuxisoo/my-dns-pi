@@ -205,6 +205,23 @@ services:
             monitor-net:
                 ipv4_address: 172.28.242.6
 
+    pihole_exporter:
+        image: ekofr/pihole-exporter:latest
+        container_name: pihole_exporter
+        restart: unless-stopped
+        environment:
+            PIHOLE_HOSTNAME: "pihole"
+            PIHOLE_PASSWORD: "${WEB_PASSWORD}"
+            INTERVAL: "30s"
+            PORT: "9617"
+        expose:
+            - "9617"
+        networks:
+            pihole-net:
+                ipv4_address: 172.28.241.12
+            monitor-net:
+                ipv4_address: 172.28.242.8
+
 networks:
     caddy-net:
         name: caddy-net
