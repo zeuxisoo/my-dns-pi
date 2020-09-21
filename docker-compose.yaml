@@ -226,6 +226,8 @@ services:
         image: carlosedp/arm_exporter:latest
         container_name: rpi_exporter
         restart: unless-stopped
+        devices:
+            - "/dev/vchiq:/dev/vchiq"
         environment:
             NODE_ID: "{{.Node.ID}}"
         command:
