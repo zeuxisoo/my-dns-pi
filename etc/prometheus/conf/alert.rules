@@ -31,7 +31,7 @@ groups:
             description: "The memory usage over 85% in the pass 2 minutes, now at {{ humanize $value }}. Monitor by instance {{ $labels.instance }} of job {{ $labels.job }}."
 
         - alert: disk-almost-full
-          expr: (node_filesystem_size_bytes{fstype="ext4"} - node_filesystem_free_bytes{fstype="ext4"}) / node_filesystem_size_bytes{fstype="ext4"} * 100 > 85
+          expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/",fstype="ext4"} * 100) / node_filesystem_size_bytes {mountpoint="/",fstype="ext4"}) > 85
           for: 2m
           labels:
             severity: warning
