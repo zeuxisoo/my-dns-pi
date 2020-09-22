@@ -1,7 +1,7 @@
 groups:
     - name: monitors
       rule:
-        - alert: monitor-service-down
+        - alert: MonitorServiceDown
           expr: up == 0
           for: 2m
           labels:
@@ -12,7 +12,7 @@ groups:
 
     - name: system
       rules:
-        - alert: high-cpu-load
+        - alert: HighCPULoad
           expr: (1 - (avg(irate(node_cpu_seconds_total{mode="idle"}[5m])))) * 100 > 80
           for: 2m
           labels:
@@ -21,7 +21,7 @@ groups:
             summary: "CPU under high loading"
             description: "The CPU load averaged over 80% in the past 2 minutes, now at {{ $value }}%. Monitor by instance {{ $labels.instance }} of job {{ $labels.job }}."
 
-        - alert: high-memory-usage
+        - alert: HighMemoryUsage
           expr: (sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes)) / sum(node_memory_MemTotal_bytes) * 100 > 85
           for: 2m
           labels:
@@ -30,7 +30,7 @@ groups:
             summary: "Memory under high usage"
             description: "The memory usage over 85% in the pass 2 minutes, now at {{ humanize $value }}. Monitor by instance {{ $labels.instance }} of job {{ $labels.job }}."
 
-        - alert: disk-almost-full
+        - alert: DiskAlmostFull
           expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/",fstype="ext4"} * 100) / node_filesystem_size_bytes {mountpoint="/",fstype="ext4"}) > 85
           for: 2m
           labels:
