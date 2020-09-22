@@ -230,15 +230,33 @@ services:
             - "/dev/vchiq:/dev/vchiq"
         command:
             - '--collector.textfile.directory=/etc/rpi_exporter/'
+        expose:
+            - "9243"
         volumes:
             - "/etc/hostname:/etc/nodename:ro"
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
-        expose:
-            - "9243"
         networks:
             monitor-net:
                 ipv4_address: 172.28.242.10
+
+    alert_manager:
+        image: prom/alertmanager:latest
+        container_name: alert_manager
+        restart: unless-stopped
+        command:
+            - "--config.file=/etc/alert-manager/conf/config.yml"
+            - '--storage.path=/etc/alert-manager/data/alertmanager'
+        expose:
+            - "9093"
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "./etc/alert-manager/conf/config.yml:/etc/alert-manager/conf/config.yml"
+            - "./etc/alert-manager/data:/etc/alert-manager/data"
+        networks:
+            monitor-net:
+                ipv4_address: 172.28.242.12
 
 networks:
     caddy-net:
