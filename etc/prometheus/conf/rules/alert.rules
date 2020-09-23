@@ -1,6 +1,6 @@
 groups:
     - name: monitors
-      rule:
+      rules:
         - alert: MonitorServiceDown
           expr: up == 0
           for: 2m
