@@ -99,6 +99,8 @@ services:
         networks:
             pihole-net:
                 ipv4_address: 172.28.241.2
+            monitor-net:
+                ipv4_address: 172.28.242.14
         depends_on:
             - caddy
             - pihole
