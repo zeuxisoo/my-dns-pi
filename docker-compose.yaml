@@ -246,7 +246,7 @@ services:
         restart: unless-stopped
         command:
             - "--config.file=/etc/alert-manager/conf/config.yml"
-            - '--storage.path=/etc/alert-manager/data/alertmanager'
+            - '--storage.path=/etc/alert-manager/data'
         expose:
             - "9093"
         volumes:
