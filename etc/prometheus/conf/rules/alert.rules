@@ -22,19 +22,19 @@ groups:
             description: "The CPU load averaged over 80% in the past 2 minutes, now at {{ $value }}%."
 
         - alert: HighMemoryUsage
-          expr: ((node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes)/node_memory_MemTotal_bytes) * 100 > 85
+          expr: ((node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes)/node_memory_MemTotal_bytes) * 100 > 80
           for: 2m
           labels:
             severity: warning
           annotations:
             summary: "Memory under high usage"
-            description: "The memory usage over 85% in the pass 2 minutes, now at {{ $value }}%. Monitor by instance {{ $labels.instance }} of job {{ $labels.job }}."
+            description: "The memory usage over 80% in the pass 2 minutes, now at {{ $value }}%. Monitor by instance {{ $labels.instance }} of job {{ $labels.job }}."
 
         - alert: DiskAlmostFull
-          expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/",fstype="ext4"} * 100) / node_filesystem_size_bytes {mountpoint="/",fstype="ext4"}) > 85
+          expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/",fstype="ext4"} * 100) / node_filesystem_size_bytes {mountpoint="/",fstype="ext4"}) > 80
           for: 2m
           labels:
             severity: warning
           annotations:
             summary: "Disk under high usage"
-            description: "The disk stroage usage over 85%, now at {{ humanize $value }}%. Monitor by instance {{ $labels.instance }} of job {{ $labels.job }}."
+            description: "The disk stroage usage over 80%, now at {{ humanize $value }}%. Monitor by instance {{ $labels.instance }} of job {{ $labels.job }}."
