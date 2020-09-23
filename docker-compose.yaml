@@ -150,6 +150,7 @@ services:
         volumes:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
+            - "./etc/prometheus/conf/rules:/etc/prometheus/conf/rules"
             - "./etc/prometheus/conf/prometheus.yml:/etc/prometheus/conf/prometheus.yml:ro"
             - "./etc/prometheus/data:/etc/prometheus/data"
         networks:
