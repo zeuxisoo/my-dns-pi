@@ -256,6 +256,8 @@ services:
             - "./etc/alert-manager/conf/config.yml:/etc/alert-manager/conf/config.yml"
             - "./etc/alert-manager/data:/etc/alert-manager/data"
         networks:
+            caddy-net:
+                ipv4_address: 172.28.240.12
             monitor-net:
                 ipv4_address: 172.28.242.12
 
