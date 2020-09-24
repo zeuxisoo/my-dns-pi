@@ -47,3 +47,12 @@ groups:
           annotations:
             summary: "CPU Temperature overcooked"
             description: "The CPU temperature over 80°C in the past 2 minutes, now at {{ $value }}°C."
+
+        - alert: HighGPUTemperature
+          expr: rpi_gpu_temperature_celsius > 80
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "GPU Temperature overcooked"
+            description: "The GPU temperature over 80°C in the past 2 minutes, now at {{ $value }}°C."
