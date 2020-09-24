@@ -38,3 +38,12 @@ groups:
           annotations:
             summary: "Disk under high usage"
             description: "The disk stroage usage over 80%, now at {{ humanize $value }}%. Monitor by instance {{ $labels.instance }} of job {{ $labels.job }}."
+
+        - alert: HighCPUTemperature
+          expr: rpi_cpu_temperature_celsius > 80
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "CPU Temperature overcooked"
+            description: "The CPU temperature over 80°C in the past 2 minutes, now at {{ $value }}°C."
