@@ -288,6 +288,9 @@ services:
             - "3000"
         volumes:
             - "./etc/grafana/data:/etc/grafana/data"
+            # Provision the config without manually config after service boot up
+            # but manual setup by default
+            # - https://grafana.com/docs/grafana/latest/administration/provisioning/#data-sources
             - "./etc/grafana/provisioning:/etc/grafana/provisioning"
             - "./etc/grafana/conf/custom.ini:/etc/grafana/conf/custom.ini"
         networks:
