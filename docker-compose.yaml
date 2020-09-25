@@ -165,6 +165,8 @@ services:
         depends_on:
             - cadvisor
             - node_exporter
+            - pihole_exporter
+            - rpi_exporter
 
     cadvisor:
         image: zcube/cadvisor:latest
