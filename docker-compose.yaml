@@ -295,6 +295,8 @@ services:
                 ipv4_address: 172.28.240.14
             monitor-net:
                 ipv4_address: 172.28.242.16
+        depends_on:
+            - prometheus
 
 networks:
     caddy-net:
