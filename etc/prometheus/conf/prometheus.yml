@@ -41,6 +41,11 @@ scrape_configs:
       static_configs:
         - targets: ['alert_manager:9093']
 
+    - job_name: 'grafana'
+      scrape_interval: 1m
+      static_configs:
+        - targets: ['grafana:3000']
+
 alerting:
     alertmanagers:
         - scheme: 'http'
