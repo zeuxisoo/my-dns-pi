@@ -5,6 +5,5 @@
 /etc/pihole
 /etc/prometheus/data
 /etc/grafana/data
-/etc/grafana/provisioning
 
 .env
