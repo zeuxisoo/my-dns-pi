@@ -1,5 +1,5 @@
 listen_addresses = ['0.0.0.0:5053']
-server_names = ['cloudflare']
+server_names = ['cloudflare', 'google']
 cache = false
 
 [sources]
