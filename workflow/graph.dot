@@ -1,0 +1,71 @@
+digraph G {
+    rankdir=LR
+
+    subgraph cluster_0 {
+        style="rounded,filled"
+        fillcolor="#0088FF"
+
+        node [style="rounded,filled", shape=box, penwidth=2, fillcolor="#0099EF", fontcolor=white]
+
+        label="My DNS PI"
+        subgraph cluster_1 {
+            fillcolor="#FFFFFF"
+            label="Services"
+
+            coredns [label="CoreDNS"]
+            pihole  [label="PiHole"]
+            dnscrypt_proxy [label="DNSCrypt-Proxy"]
+
+            caddy [label="Caddy"]
+            monitorix [label="Monitorix"]
+
+            prometheus [label="Prometheus"]
+            cadvisor [label="cAdvisor"]
+            node_exporter [label="NodeExporter"]
+            pihole_exporter [label="PiHoleExporter"]
+            rpi_exporter [label="RPIExporter"]
+
+            alert_manager [label="AlertManager"]
+            grafana [label="Grafana"]
+        }
+    }
+
+    client -> router [label="DOT or DNS"]
+
+    //  Router
+    router -> coredns [label="DoT"]
+    router -> pihole [label="DNS"]
+    router -> caddy [label="HTTP"]
+
+    coredns -> pihole [label="DNS"]
+
+    //  Pihole
+    pihole -> dnscrypt_proxy [label="DNS"]
+    pihole -> pihole_exporter [label="fetch"]
+
+    dnscrypt_proxy -> clouldflare_dns [label="DoH"]
+    dnscrypt_proxy -> google_dns [label="DoH"]
+
+    //  Caddy
+    caddy -> pihole [label="https://pi.hole"]
+    caddy -> monitorix [label="https://monitor.hole"]
+    caddy -> prometheus [label="https://prometheus.hole"]
+    caddy -> alert_manager [label="https://alert.hole"]
+    caddy -> grafana [label="https://grafana.hole"]
+
+    //  Prometheus
+    cadvisor -> prometheus [label="scape"]
+    node_exporter -> prometheus [label="scape"]
+    pihole_exporter -> prometheus [label="scape"]
+    rpi_exporter -> prometheus [label="scape"]
+    alert_manager -> prometheus [label="scape"]
+    grafana -> prometheus [label="scape"]
+
+    //  Alert Manager
+    alert_manager -> email [label="SMTP"]
+
+    prometheus -> alert_manager [label="notify"]
+
+    // Grafana
+    prometheus -> grafana [label="display"]
+}
