@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 11074,
   "graphTooltip": 0,
-  "id": 9,
-  "iteration": 1601190904420,
+  "id": 5,
+  "iteration": 1601651816385,
   "links": [
     {
       "icon": "external link",
@@ -1307,7 +1307,7 @@
       ],
       "targets": [
         {
-          "expr": "node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext.*|xfs\",mountpoint !~\".*pod.*\"}-0",
+          "expr": "node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext.*|xfs|exfat\",mountpoint !~\".*pod.*\"}-0",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1317,7 +1317,7 @@
           "refId": "C"
         },
         {
-          "expr": "node_filesystem_avail_bytes {instance=~'$node',fstype=~\"ext.*|xfs\",mountpoint !~\".*pod.*\"}-0",
+          "expr": "node_filesystem_avail_bytes {instance=~'$node',fstype=~\"ext.*|xfs|exfat\",mountpoint !~\".*pod.*\"}-0",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1327,7 +1327,7 @@
           "refId": "A"
         },
         {
-          "expr": "(node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext.*|xfs\",mountpoint !~\".*pod.*\"}-node_filesystem_free_bytes{instance=~'$node',fstype=~\"ext.*|xfs\",mountpoint !~\".*pod.*\"}) *100/(node_filesystem_avail_bytes {instance=~'$node',fstype=~\"ext.*|xfs\",mountpoint !~\".*pod.*\"}+(node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext.*|xfs\",mountpoint !~\".*pod.*\"}-node_filesystem_free_bytes{instance=~'$node',fstype=~\"ext.*|xfs\",mountpoint !~\".*pod.*\"}))",
+          "expr": "(node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext.*|xfs|exfat\",mountpoint !~\".*pod.*\"}-node_filesystem_free_bytes{instance=~'$node',fstype=~\"ext.*|xfs|exfat\",mountpoint !~\".*pod.*\"}) *100/(node_filesystem_avail_bytes {instance=~'$node',fstype=~\"ext.*|xfs|exfat\",mountpoint !~\".*pod.*\"}+(node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext.*|xfs|exfat\",mountpoint !~\".*pod.*\"}-node_filesystem_free_bytes{instance=~'$node',fstype=~\"ext.*|xfs|exfat\",mountpoint !~\".*pod.*\"}))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1337,7 +1337,7 @@
           "refId": "B"
         }
       ],
-      "title": "【$show_hostname】：Disk Space Used Basic(EXT?/XFS)",
+      "title": "【$show_hostname】：Disk Space Used Basic (EXT?/XFS/EXFat)",
       "transform": "table",
       "type": "table-old"
     },
@@ -2449,6 +2449,9 @@
       "links": [],
       "maxPerRow": 6,
       "nullPointMode": "null as zero",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "7.2.0",
       "pointradius": 5,
@@ -2594,6 +2597,9 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "7.2.0",
       "pointradius": 5,
@@ -2716,6 +2722,9 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "7.2.0",
       "pointradius": 5,
@@ -2825,6 +2834,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "7.2.0",
       "pointradius": 5,
@@ -2962,6 +2974,9 @@
       "links": [],
       "maxPerRow": 6,
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "7.2.0",
       "pointradius": 5,
@@ -3069,6 +3084,9 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null as zero",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "7.2.0",
       "pointradius": 5,
@@ -3669,5 +3687,5 @@
   "timezone": "browser",
   "title": "Node Exporter",
   "uid": "node-exporter-20200925-2354",
-  "version": 1
+  "version": 2
 }
