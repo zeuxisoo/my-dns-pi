@@ -306,6 +306,7 @@ services:
 
     cloudflare_ddns:
         image: oznu/cloudflare-ddns:latest
+        container: cloudlfare_ddns
         restart: always
         environment:
             API_KEY: "${CLOUDFLARE_DDNS_API_KEY}"
