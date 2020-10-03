@@ -288,6 +288,8 @@ services:
         expose:
             - "3000"
         volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
             - "./etc/grafana/data:/etc/grafana/data"
             # Provision the config without manually config after service boot up
             # but manual setup by default
@@ -310,6 +312,9 @@ services:
             ZONE: "${CLOUDFLARE_DDNS_ZONE}"
             SUBDOMAIN: "${CLOUDFLARE_DDNS_DOMAIN}"
             PROXIED: "false"
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
 
 networks:
     caddy-net:
