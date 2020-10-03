@@ -18,6 +18,7 @@ digraph G {
 
             caddy [label="Caddy"]
             monitorix [label="Monitorix"]
+            cloudflare_ddns [label="Cloudlare-DDNS"]
 
             prometheus [label="Prometheus"]
             cadvisor [label="cAdvisor"]
