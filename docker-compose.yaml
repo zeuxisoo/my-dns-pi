@@ -315,6 +315,9 @@ services:
         volumes:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
+        networks:
+            pihole-net:
+                ipv4_address: 172.28.241.14
 
 networks:
     caddy-net:
