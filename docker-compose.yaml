@@ -320,6 +320,47 @@ services:
             pihole-net:
                 ipv4_address: 172.28.241.14
 
+    aria2_pro:
+        image: p3terx/aria2-pro:latest
+        container_name: aria2_pro
+        restart: unless-stopped
+        environment:
+            TZ: "Asia/Hong_Kong"
+            RPC_SECRET: "${ARIA2_PRO_RPC_SECRET}"
+            RPC_PORT: "6800"
+            LISTEN_PORT: "6898" # for bt 6881-6999
+            DISK_CACHE: "64M"
+            IPV6_MODE: "false"
+            UPDATE_TRACKERS: "true"
+        ports:
+            - "6800:6800"
+            - "6800:6898/tcp"
+            - "6800:6898/udp"
+        volumes:
+            - "./etc/aria2/config:/config"
+            - "${ARIA2_PRO_DOWNLOADS_PATH}:/downloads"
+        logging:
+            driver: json-file
+            options:
+                max-size: 1m
+        networks:
+            download-net:
+                ipv4_address: 172.28.243.2
+
+    aria2_ng:
+        image: p3terx/ariang:latest
+        container_name: aria2_ng
+        restart: unless-stopped
+        expose:
+            - "6880"
+        logging:
+            driver: json-file
+            options:
+                max-size: 1m
+        networks:
+            download-net:
+                ipv4_address: 172.28.243.4
+
 networks:
     caddy-net:
         name: caddy-net
@@ -339,3 +380,9 @@ networks:
         ipam:
             config:
                 - subnet: 172.28.242.0/24
+
+    download-net:
+        name: download-net
+        ipam:
+            config:
+                - subnet: 172.28.243.0/24
