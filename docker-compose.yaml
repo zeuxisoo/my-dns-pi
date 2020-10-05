@@ -346,7 +346,7 @@ services:
                 max-size: 1m
         networks:
             caddy-net:
-                ipv4_address: 172.28.243.16
+                ipv4_address: 172.28.240.16
 
     aria2_ng:
         image: p3terx/ariang:latest
