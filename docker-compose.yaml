@@ -334,8 +334,8 @@ services:
             UPDATE_TRACKERS: "true"
         ports:
             - "6800:6800"
-            - "6800:6898/tcp"
-            - "6800:6898/udp"
+            - "6898:6898/tcp"
+            - "6898:6898/udp"
         volumes:
             - "./etc/aria2/config:/config"
             - "${ARIA2_PRO_DOWNLOADS_PATH}:/downloads"
