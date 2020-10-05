@@ -343,9 +343,6 @@ services:
             driver: json-file
             options:
                 max-size: 1m
-        networks:
-            download-net:
-                ipv4_address: 172.28.243.2
 
     aria2_ng:
         image: p3terx/ariang:latest
@@ -358,8 +355,8 @@ services:
             options:
                 max-size: 1m
         networks:
-            download-net:
-                ipv4_address: 172.28.243.4
+            caddy-net:
+                ipv4_address: 172.28.240.16
 
 networks:
     caddy-net:
@@ -380,9 +377,3 @@ networks:
         ipam:
             config:
                 - subnet: 172.28.242.0/24
-
-    download-net:
-        name: download-net
-        ipam:
-            config:
-                - subnet: 172.28.243.0/24
