@@ -1,6 +1,6 @@
 {
   "port": 8080,
-  "baseURL": "https://file.hole",
+  "baseURL": "",
   "address": "0.0.0.0",
   "log": "stdout",
   "database": "/database/filebrowser.db",

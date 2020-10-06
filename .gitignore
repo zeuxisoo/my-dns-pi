@@ -6,4 +6,6 @@
 /etc/prometheus/data
 /etc/grafana/data
 
+/etc/file-browser/database/filebrowser.db
+
 .env
