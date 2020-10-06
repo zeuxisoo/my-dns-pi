@@ -338,6 +338,8 @@ services:
             - "6898:6898/tcp"
             - "6898:6898/udp"
         volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
             - "./etc/aria2/config:/config"
             - "${ARIA2_PRO_DOWNLOADS_PATH}:/downloads"
         logging:
@@ -354,6 +356,9 @@ services:
         restart: unless-stopped
         expose:
             - "6880"
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
         logging:
             driver: json-file
             options:
