@@ -20,6 +20,9 @@ digraph G {
             monitorix [label="Monitorix"]
             cloudflare_ddns [label="Cloudlare-DDNS"]
 
+            aria2_pro [label="Aria2Pro"]
+            aria2_ng [label="AriaNg"]
+
             prometheus [label="Prometheus"]
             cadvisor [label="cAdvisor"]
             node_exporter [label="NodeExporter"]
@@ -53,6 +56,8 @@ digraph G {
     caddy -> prometheus [label="https://prometheus.hole"]
     caddy -> alert_manager [label="https://alert.hole"]
     caddy -> grafana [label="https://grafana.hole"]
+    caddy -> aria2_pro [label="https://aria2.hole"]
+    caddy -> aria2_ng [label="wss://aria2.hole/jsonrpc"]
 
     //  Prometheus
     cadvisor -> prometheus [label="scape"]
@@ -69,4 +74,6 @@ digraph G {
 
     // Grafana
     prometheus -> grafana [label="display"]
+
+    aria2_pro -> aria2_ng [label="connect"]
 }
