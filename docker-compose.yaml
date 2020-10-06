@@ -377,7 +377,7 @@ services:
             - "/etc/timezone:/etc/timezone:ro"
             - "/etc/localtime:/etc/localtime:ro"
             - "${FILE_BROWSER_DATA_PATH}:/data"
-            - "./etc/file-browser/database.db:/database.db"
+            - "./etc/file-browser/database/filebrowser.db:/database/filebrowser.db"
             - "./etc/file-browser/conf/filebrowser.json:/.filebrowser.json"
         networks:
             caddy-net:

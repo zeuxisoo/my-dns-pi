@@ -3,6 +3,6 @@
   "baseURL": "https://file.hole",
   "address": "0.0.0.0",
   "log": "stdout",
-  "database": "/database.db",
+  "database": "/database/filebrowser.db",
   "root": "/data"
 }
