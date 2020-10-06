@@ -75,5 +75,9 @@ digraph G {
     // Grafana
     prometheus -> grafana [label="display"]
 
+    // Aria2
     aria2_pro -> aria2_ng [label="connect"]
+
+    // Cloudflare DDNS
+    cloudflare_ddns -> cloudflare [label="update"]
 }
