@@ -367,6 +367,22 @@ services:
             caddy-net:
                 ipv4_address: 172.28.240.18
 
+    file_browser:
+        image: filebrowser/filebrowser:latest
+        container_name: file_browser
+        restart: unless-stopped
+        expose:
+            - "8080"
+        volumes:
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "${FILE_BROWSER_DATA_PATH}:/data"
+            - "./etc/file-browser/database.db:/database.db"
+            - "./etc/file-browser/conf/filebrowser.json:/.filebrowser.json"
+        networks:
+            caddy-net:
+                ipv4_address: 172.28.240.20
+
 networks:
     caddy-net:
         name: caddy-net
