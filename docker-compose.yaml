@@ -368,7 +368,7 @@ services:
                 ipv4_address: 172.28.240.18
 
     file_browser:
-        image: filebrowser/filebrowser:latest
+        image: filebrowser/filebrowser:pi
         container_name: file_browser
         restart: unless-stopped
         expose:
