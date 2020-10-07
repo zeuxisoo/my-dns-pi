@@ -1,6 +1,6 @@
 # My DNS Pi
  
-A docker-compose file to provide set of service included a secure Pi-hole, monitoring and download services
+A docker-compose file to provide a set of service included a secure Pi-hole, monitoring, and download services
 
 ## Usage
 
