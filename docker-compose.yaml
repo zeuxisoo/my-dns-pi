@@ -326,6 +326,8 @@ services:
         restart: unless-stopped
         environment:
             TZ: "Asia/Hong_Kong"
+            PUID: "${ARIA2_PRO_PUID}"
+            PGID: "${ARIA2_PRO_PGID}"
             RPC_SECRET: "${ARIA2_PRO_RPC_SECRET}"
             RPC_PORT: "6800"
             LISTEN_PORT: "6898" # for bt 6881-6999
