@@ -22,6 +22,12 @@ A docker-compose file to provide a set of service included a secure Pi-hole, mon
     vim .env
     ```
 
+    If you want to find the current user id
+
+    ```
+    id username
+    ```
+
 4. Change service related data permission
 
     ```
