@@ -39,8 +39,7 @@ services:
         environment:
             TZ: "Asia/Hong_Kong"
             WEBPASSWORD: "${WEB_PASSWORD}"
-            DNS1: "172.28.241.6#5053"
-            DNS2: "172.28.241.6#5053"
+            PIHOLE_DNS_: "172.28.241.6#5053;172.28.241.6#5053"
             # Listen on all interface not only eth1 by default
             # and change the default listen eth0 to eth1 for fallback to pihole-net
             # normal:
