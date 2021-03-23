@@ -90,7 +90,7 @@ A docker-compose file to provide a set of service included a secure Pi-hole, mon
 9. Start the docker
     
     ```
-    sudo docker up -d
+    sudo docker-compose up -d
     ```
 
 10. If you don't set the pi dns in router or local network settings. You can hardcode your domain in local `hosts` file the like
