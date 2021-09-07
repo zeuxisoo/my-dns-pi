@@ -32,13 +32,19 @@ A docker-compose file to provide a set of service included AdGuard Home and othe
     Create the config file
 
     ```
-    cp etc/caddy/sites/dot.domain.conf.example etc/caddy/sites/your.domain.conf
+    cp etc/caddy/sites/pi.hole.conf.example etc/caddy/sites/pi.hole.conf
     ```
 
     Edit the config file content
 
     ```
     vim etc/caddy/sites/your.domain.conf
+    ```
+
+    And create the `pi.hole` domain config
+
+    ```
+    cp etc/caddy/sites/pi.hole.conf.example etc/caddy/sites/pi.hole.conf
     ```
 
 5. Create docker networks
@@ -68,9 +74,11 @@ A docker-compose file to provide a set of service included AdGuard Home and othe
     192.168.XXX.XXX pi.hole
     ```
 
-8. Open the browser access the `https://pi.hole/`
+8. Open the browser access the `https://pi.hole/` to setup when first time connect
 
-9. Login and add the following address to `Local DNS Records`
+9. After installation setup, Change the `pi.hole.conf` file replace the 3000 port to 80 port
+
+10. Try to login and add the following address to `Local DNS Records`
 
     | Domain          | Pi IP Address   | Description  |
     |-----------------|-----------------| ------------ |
