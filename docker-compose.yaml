@@ -36,7 +36,7 @@ services:
         volumes:
             - "./etc/adguard-home/work:/opt/adguardhome/work"
             - "./etc/adguard-home/conf:/opt/adguardhome/conf"
-            - "./etc/caddy/data/certificates:/opt/caddy/data/certificates:ro"
+            - "./etc/caddy/data/caddy/certificates:/opt/caddy/data/certificates:ro"
         networks:
             caddy-net:
                 ipv4_address: 172.28.240.4
