@@ -16,7 +16,7 @@ services:
             - "./etc/caddy/sites:/etc/caddy/sites"
             - "./etc/caddy/Caddyfile:/etc/caddy/Caddyfile"
         networks:
-            adguard-home-net:
+            caddy-net:
                 ipv4_address: 172.28.240.2
         depends_on:
             - adguard_home
@@ -54,7 +54,7 @@ services:
             PROXIED: "false"
         networks:
             caddy-net:
-                ipv4_address: 172.28.241.6
+                ipv4_address: 172.28.240.6
             adguard-home-net:
                 ipv4_address: 172.28.241.4
 
