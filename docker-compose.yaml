@@ -16,7 +16,8 @@ services:
             - "./etc/caddy/sites:/etc/caddy/sites"
             - "./etc/caddy/Caddyfile:/etc/caddy/Caddyfile"
         networks:
-            - caddy-net
+            adguard-home-net:
+                ipv4_address: 172.28.240.2
         depends_on:
             - adguard_home
 
@@ -37,8 +38,10 @@ services:
             - "./etc/adguard-home/conf:/opt/adguardhome/conf"
             - "./etc/caddy/data/certificates:/opt/caddy/data/certificates:ro"
         networks:
-            - caddy-net
-            - adguard-home-net
+            caddy-net:
+                ipv4_address: 172.28.240.4
+            adguard-home-net:
+                ipv4_address: 172.28.241.2
 
     cloudflare_ddns:
         image: oznu/cloudflare-ddns:latest
@@ -50,7 +53,10 @@ services:
             SUBDOMAIN: "${CLOUDFLARE_DDNS_DOMAIN}"
             PROXIED: "false"
         networks:
-            - adguard-home-net
+            caddy-net:
+                ipv4_address: 172.28.241.6
+            adguard-home-net:
+                ipv4_address: 172.28.241.4
 
 networks:
     caddy-net:
@@ -59,3 +65,6 @@ networks:
 
     adguard-home-net:
         name: adguard-home-net
+        ipam:
+            config:
+                - subnet: 172.28.241.0/24
