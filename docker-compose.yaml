@@ -27,6 +27,8 @@ services:
         ports:
             - "53:53"
             - "853:853/tcp"
+        expose:
+            - "80:80/tcp"
             - "3000:3000/tcp"
         environment:
             - TZ=${TZ}
