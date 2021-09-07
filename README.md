@@ -1,6 +1,6 @@
 # My DNS Pi
 
-A docker-compose file to provide a set of service included a secure Pi-hole, monitoring, and download services
+A docker-compose file to provide a set of service included AdGuard Home and other services
 
 ## Usage
 
@@ -27,31 +27,7 @@ A docker-compose file to provide a set of service included a secure Pi-hole, mon
     ```
     id username
     ```
-
-4. Change service related data permission
-
-    ```
-    sudo chown -Rf 65534:65534 etc/dnscrypt-proxy/config
-    sudo chown -Rf 65534:65534 etc/prometheus/data
-    sudo chown -Rf 65534:65534 etc/alert-manager/data
-    sudo chown -Rf 472:472 etc/grafana/data
-    ```
-
-6. Setup config file for AlertManager
-
-    Create the config file
-
-    ```
-    cp etc/alert-manager/conf/config.yml.example etc/alert-manager/conf/config.yml
-    ```
-
-    Edit the config file content
-
-    ```
-    vim etc/alert-manager/conf/config.yml     
-    ```
-
-6. Setup config file for DoT domain in Caddy server
+4. Setup config file for DoT domain in Caddy server
 
     Create the config file
 
@@ -65,35 +41,20 @@ A docker-compose file to provide a set of service included a secure Pi-hole, mon
     vim etc/caddy/sites/your.domain.conf
     ```
 
-7. Setup TLS certification path in CoreDNS config file
-
-    Create the config file
-
-    ```
-    cp etc/coredns/Corefile.example etc/coredns/Corefile
-    ```
-
-    Edit the config file content
-    
-    ```
-    vim etc/coredns/Corefile
-    ```
-
-8. Create docker networks
+5. Create docker networks
 
     ```
     sudo docker network create caddy-net --subnet=172.28.240.0/24
-    sudo docker network create pihole-net --subnet=172.28.241.0/24
-    sudo docker network create monitor-net --subnet=172.28.242.0/24
+    sudo docker network create adguard-home-net --subnet=172.28.241.0/24
     ```
 
-9. Start the docker
-    
+6. Start the docker
+
     ```
     sudo docker-compose up -d
     ```
 
-10. If you don't set the pi dns in router or local network settings. You can hardcode your domain in local `hosts` file the like
+7. If you don't set the pi dns in router or local network settings. You can hardcode your domain in local `hosts` file the like
 
     Edit the `hosts` file
 
@@ -102,23 +63,18 @@ A docker-compose file to provide a set of service included a secure Pi-hole, mon
     ```
 
     Add the `pi.hole` domain to pi ip address
-    
+
     ```
     192.168.XXX.XXX pi.hole
     ```
 
-12. Open the browser access the `https://pi.hole/`
+8. Open the browser access the `https://pi.hole/`
 
-13. Login and add the following address to `Local DNS Records`
+9. Login and add the following address to `Local DNS Records`
 
     | Domain          | Pi IP Address   | Description  |
     |-----------------|-----------------| ------------ |
-    | monitor.hole    | 192.168.XXX.XXX | Monitorix    |
-    | prometheus.hole | 192.168.XXX.XXX | Prometheus   |
-    | alert.hole      | 192.168.XXX.XXX | AlertManager |
-    | grafana.hole    | 192.168.XXX.XXX | Granfana     |
-    | aria2.hole      | 192.168.XXX.XXX | Aria2        |
-    | file.hole       | 192.168.XXX.XXX | FileManager  |
+    | pi.hole         | 192.168.XXX.XXX | AdGuard Home |
 
 ## Other
 

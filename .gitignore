@@ -1,11 +1,6 @@
 /etc/caddy/config
 /etc/caddy/data
-/etc/dnsmasq.d
-/etc/monitorix/assets
-/etc/pihole
-/etc/prometheus/data
-/etc/grafana/data
-
-/etc/file-browser/database/filebrowser.db
+/etc/adguard-home/conf
+/etc/adguard-home/work
 
 .env

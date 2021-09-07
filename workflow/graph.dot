@@ -7,76 +7,27 @@ digraph G {
 
         node [style="rounded,filled", shape=box, penwidth=2, fillcolor="#0099EF", fontcolor=white]
 
-        label="My DNS PI"
+        label="My DNS PI (2.x)"
         subgraph cluster_1 {
             fillcolor="#FFFFFF"
             label="Services"
 
-            coredns [label="CoreDNS"]
-            pihole  [label="PiHole"]
-            dnscrypt_proxy [label="DNSCrypt-Proxy"]
+            adguard_home [label="AdGuard Home"]
 
             caddy [label="Caddy"]
-            monitorix [label="Monitorix"]
             cloudflare_ddns [label="Cloudlare-DDNS"]
-
-            aria2_pro [label="Aria2Pro"]
-            aria2_ng [label="AriaNg"]
-
-            prometheus [label="Prometheus"]
-            cadvisor [label="cAdvisor"]
-            node_exporter [label="NodeExporter"]
-            pihole_exporter [label="PiHoleExporter"]
-            rpi_exporter [label="RPIExporter"]
-
-            alert_manager [label="AlertManager"]
-            grafana [label="Grafana"]
         }
     }
 
     client -> router [label="DOT or DNS"]
 
     //  Router
-    router -> coredns [label="DoT"]
-    router -> pihole [label="DNS"]
+    router -> adguard_home [label="DoT"]
+    router -> adguard_home [label="DNS"]
     router -> caddy [label="HTTP"]
 
-    coredns -> pihole [label="DNS"]
-
-    //  Pihole
-    pihole -> dnscrypt_proxy [label="DNS"]
-    pihole -> pihole_exporter [label="fetch"]
-
-    dnscrypt_proxy -> clouldflare_dns [label="DoH"]
-    dnscrypt_proxy -> google_dns [label="DoH"]
-
     //  Caddy
-    caddy -> pihole [label="https://pi.hole"]
-    caddy -> monitorix [label="https://monitor.hole"]
-    caddy -> prometheus [label="https://prometheus.hole"]
-    caddy -> alert_manager [label="https://alert.hole"]
-    caddy -> grafana [label="https://grafana.hole"]
-    caddy -> aria2_pro [label="https://aria2.hole"]
-    caddy -> aria2_ng [label="wss://aria2.hole/jsonrpc"]
-
-    //  Prometheus
-    cadvisor -> prometheus [label="scape"]
-    node_exporter -> prometheus [label="scape"]
-    pihole_exporter -> prometheus [label="scape"]
-    rpi_exporter -> prometheus [label="scape"]
-    alert_manager -> prometheus [label="scape"]
-    grafana -> prometheus [label="scape"]
-
-    //  Alert Manager
-    alert_manager -> email [label="SMTP"]
-
-    prometheus -> alert_manager [label="notify"]
-
-    // Grafana
-    prometheus -> grafana [label="display"]
-
-    // Aria2
-    aria2_pro -> aria2_ng [label="connect"]
+    caddy -> adguard_home [label="https://adguard.hole"]
 
     // Cloudflare DDNS
     cloudflare_ddns -> cloudflare [label="update"]
