@@ -33,6 +33,7 @@ services:
         volumes:
             - "./etc/adguard-home/work:/opt/adguardhome/work"
             - "./etc/adguard-home/conf:/opt/adguardhome/conf"
+            - "./etc/caddy/data/certificates:/opt/caddy/data/certificates:ro"
         networks:
             - caddy-net
             - adguard-home-net
