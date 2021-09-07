@@ -26,7 +26,8 @@ services:
         container_name: adguard_home
         restart: always
         ports:
-            - "53:53"
+            - "53:53/tcp"
+            - "53:53/udp"
             - "853:853/tcp"
         expose:
             - "80/tcp"
