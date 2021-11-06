@@ -5,6 +5,6 @@ RUN xcaddy build \
 
 FROM caddy:2.4.5
 
-RUN apt install nss
+RUN apk add nss-tools
 
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
