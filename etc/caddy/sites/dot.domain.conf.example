@@ -1,6 +1,10 @@
 dot.domain {
     tls {
-        dns cloudflare AUTH_TOKEN
+        issuer acme {
+            dns cloudflare AUTH_TOKEN
+
+            preferred_chains smallest
+        }
     }
 
     respond "Hello, world!"
