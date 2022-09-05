@@ -18,8 +18,6 @@ services:
         networks:
             caddy-net:
                 ipv4_address: 172.28.240.2
-        depends_on:
-            - adguard_home
 
     adguard_home:
         image: adguard/adguardhome:latest
