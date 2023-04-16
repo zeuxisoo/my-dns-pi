@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+    vaultwarden:
+        image: vaultwarden/server:latest
+        container_name: vaultwarden
+        restart: always
+        environment:
+            - TZ=${TZ}
+            - DATA_FOLDER=${VAULTWARDEN_DATA_FOLDER}
+            - DATABASE_URL=${VAULTWARDEN_DATABASE_URL}
+            - ATTACHMENTS_FOLDER=${VAULTWARDEN_ATTACHMENTS_FOLDER}
+            - ICON_CACHE_FOLDER=${VAULTWARDEN_ICON_CACHE_FOLDER}
+            - DISABLE_ADMIN_TOKEN=${VAULTWARDEN_DISABLE_ADMIN_TOKEN}
+            - ADMIN_TOKEN=${VAULTWARDEN_ADMIN_TOKEN}
+            - SIGNUPS_ALLOWED=${VAULTWARDEN_SIGNUPS_ALLOWED}
+            - INVITATIONS_ALLOWED=${VAULTWARDEN_INVITATIONS_ALLOWED}
+            - WEBSOCKET_ENABLED=${VAULTWARDEN_WEBSOCKET_ENABLED}
+        volumes:
+            - "./etc/vaultwarden/data:/data"
+        networks:
+            caddy-net:
+                ipv4_address: 172.28.240.8
+
+networks:
+    caddy-net:
+        name: caddy-net
+        external: true

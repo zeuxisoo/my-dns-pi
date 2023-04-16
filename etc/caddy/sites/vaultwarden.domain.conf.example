@@ -1,0 +1,14 @@
+vaultwarden.domain {
+    tls {
+        issuer acme {
+            dns cloudflare AUTH_TOKEN
+            resolvers adguard_home
+
+            preferred_chains smallest
+        }
+    }
+
+    reverse_proxy /notifications/hub vaultwarden:3012
+
+    reverse_proxy vaultwarden:80
+}
