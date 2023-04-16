@@ -10,5 +10,7 @@ vaultwarden.domain {
 
     reverse_proxy /notifications/hub vaultwarden:3012
 
-    reverse_proxy vaultwarden:80
+    reverse_proxy vaultwarden:80 {
+        header_up X-Real-IP {remote_host}
+    }
 }
