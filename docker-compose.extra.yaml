@@ -7,6 +7,7 @@ services:
         restart: always
         environment:
             - TZ=${TZ}
+            - DOMAIN=${VAULTWARDEN_DOMAIN}
             - DATA_FOLDER=${VAULTWARDEN_DATA_FOLDER}
             - DATABASE_URL=${VAULTWARDEN_DATABASE_URL}
             - ATTACHMENTS_FOLDER=${VAULTWARDEN_ATTACHMENTS_FOLDER}
