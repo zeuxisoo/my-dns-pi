@@ -33,6 +33,16 @@ services:
             caddy-net:
                 ipv4_address: 172.28.240.8
 
+    usememos:
+        image: neosmemo/memos:latest
+        container_name: usememos
+        restart: always
+        volumes:
+            - "./etc/usememos/data:/var/opt/memos"
+        networks:
+            caddy-net:
+                ipv4_address: 172.28.240.10
+
 networks:
     caddy-net:
         name: caddy-net

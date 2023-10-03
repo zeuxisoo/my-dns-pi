@@ -1,6 +1,6 @@
 /etc/caddy/config
 /etc/caddy/data
-/etc/caddy/sites
+/etc/caddy/sites/*.conf
 /etc/adguard-home/conf
 /etc/adguard-home/work
 
