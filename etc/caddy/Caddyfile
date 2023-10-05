@@ -1,1 +1,2 @@
+import snippets/*.conf
 import sites/*.conf

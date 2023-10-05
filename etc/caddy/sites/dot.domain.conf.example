@@ -1,12 +1,5 @@
 dot.domain {
-    tls {
-        issuer acme {
-            dns cloudflare AUTH_TOKEN
-            resolvers adguard_home
-
-            preferred_chains smallest
-        }
-    }
+    import tls_issuer_resolver_cloudflare
 
     respond "Hello, world!"
 }

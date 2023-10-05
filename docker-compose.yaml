@@ -14,6 +14,7 @@ services:
             - "./etc/caddy/data:/data"
             - "./etc/caddy/config:/config"
             - "./etc/caddy/sites:/etc/caddy/sites"
+            - "./etc/caddy/snippets:/etc/caddy/snippets"
             - "./etc/caddy/Caddyfile:/etc/caddy/Caddyfile"
         networks:
             caddy-net:
