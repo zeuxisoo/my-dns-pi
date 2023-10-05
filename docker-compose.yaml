@@ -10,6 +10,8 @@ services:
         ports:
             - "80:80"
             - "443:443"
+        environment:
+            - CF_API_TOKEN=${CADDY_CF_API_TOKEN}
         volumes:
             - "./etc/caddy/data:/data"
             - "./etc/caddy/config:/config"
