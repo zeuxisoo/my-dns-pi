@@ -1,2 +1,11 @@
+{
+    servers {
+        trusted_proxies cloudflare {
+            interval 1h
+            timeout  15s
+        }
+    }
+}
+
 import snippets/*.conf
 import sites/*.conf
