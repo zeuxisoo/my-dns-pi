@@ -16,6 +16,9 @@ digraph G {
 
             caddy [label="Caddy"]
             cloudflare_ddns [label="Cloudlare-DDNS"]
+
+            usememos[label="Memos"]
+            vaultwarden[label="Vaultwarden"]
         }
     }
 
@@ -28,6 +31,8 @@ digraph G {
 
     //  Caddy
     caddy -> adguard_home [label="https://adguard.hole"]
+    caddy -> usememos [label="https://memos.hole"]
+    caddy -> vaultwarden [label="https://vaultwarden.hole"]
 
     // Cloudflare DDNS
     cloudflare_ddns -> cloudflare [label="update"]
