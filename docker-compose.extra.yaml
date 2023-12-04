@@ -34,8 +34,9 @@ services:
                 ipv4_address: 172.28.240.8
 
     usememos:
-        image: neosmemo/memos:latest
+        #image: neosmemo/memos:latest
         container_name: usememos
+        build: ./docker/usememos
         restart: always
         volumes:
             - "./etc/usememos/data:/var/opt/memos"
