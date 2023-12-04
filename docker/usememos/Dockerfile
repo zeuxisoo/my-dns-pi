@@ -11,6 +11,10 @@ RUN apk --no-cache add curl \
     && mv memos-${MEMOS_VERSION} memos \
     && cd /frontend/memos/web/src/locales \
     && find . -name '*.json' ! -name 'en.json' ! -name 'zh-*.json' | xargs -I '%%' sh -c 'echo "{}" > %%' \
+    && cd /frontend/memos/web/src \
+    && awk 'BEGIN {RS=""}{gsub(/[ ]{2}"([a-z]{2})(\-BR)?",\n/,"")}1' i18n.ts > i18n.tmp.ts \
+    && sed -r 's/([ ]{2})"zh-Hans",/\1"en","zh-Hans",/' i18n.tmp.ts > i18n.ts \
+    && rm -rf i18n.tmp.ts \
     && cd /frontend/memos/web \
     && corepack enable && pnpm i --frozen-lockfile && pnpm type-gen \
     && pnpm build \
