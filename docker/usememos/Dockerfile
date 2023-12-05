@@ -28,8 +28,9 @@ WORKDIR /backend
 
 COPY --from=frontend /frontend/memos /backend/memos
 
-RUN cd /backend/memos \
-    && CGO_ENABLED=0 go build -o memos ./main.go
+RUN apk --no-cache add gcc g++ \
+    && cd /backend/memos \
+    && CGO_ENABLED=1 go build -o memos ./main.go
 
 # Production
 FROM alpine:latest AS memos
