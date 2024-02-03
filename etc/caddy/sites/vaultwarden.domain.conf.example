@@ -1,8 +1,6 @@
 vaultwarden.domain {
     import tls_issuer_resolver_cloudflare
 
-    reverse_proxy /notifications/hub vaultwarden:3012
-
     reverse_proxy vaultwarden:80 {
         import reverse_proxy_trusted_cloudflare
     }
