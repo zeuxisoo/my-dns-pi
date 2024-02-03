@@ -1,7 +1,7 @@
 # Frontend
 FROM node:21-alpine AS frontend
 
-ENV MEMOS_VERSION=0.17.1
+ENV MEMOS_VERSION=0.19.0
 
 WORKDIR /frontend
 
@@ -18,7 +18,6 @@ RUN apk --no-cache add curl \
     && cd /frontend/memos/web \
     && corepack enable && pnpm i --frozen-lockfile && pnpm type-gen \
     && pnpm build \
-    && rm -rf /frontend/memos/server/dist && cp -Rf /frontend/memos/web/dist /frontend/memos/server/dist \
     && rm -rf /frontend/memos.tar.gz
 
 # Backend
@@ -30,7 +29,7 @@ COPY --from=frontend /frontend/memos /backend/memos
 
 RUN apk --no-cache add gcc g++ \
     && cd /backend/memos \
-    && CGO_ENABLED=1 go build -o memos ./main.go
+    && CGO_ENABLED=1 go build -o memos ./bin/memos/main.go
 
 # Production
 FROM alpine:latest AS memos
@@ -42,6 +41,7 @@ WORKDIR /memos
 RUN apk add --no-cache tzdata \
     && mkdir /var/opt/memos
 
+COPY --from=frontend /frontend/memos/web/dist ./dist
 COPY --from=backend /backend/memos/memos ./memos
 
 VOLUME /var/opt/memos
