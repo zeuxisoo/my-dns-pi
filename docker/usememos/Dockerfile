@@ -1,7 +1,7 @@
 # Frontend
 FROM node:21-alpine AS frontend
 
-ENV MEMOS_VERSION=0.19.0
+ENV MEMOS_VERSION=0.19.1
 
 WORKDIR /frontend
 
