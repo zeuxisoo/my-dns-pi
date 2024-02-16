@@ -59,7 +59,8 @@ services:
         environment:
             - CF_API_TOKEN=${CLOUDFLARE_DDNS_API_KEY}
             - DOMAINS=${CLOUDFLARE_DDNS_DOMAIN}
-            - PROXIED=false
+            - IP6_PROVIDER=${CLOUDFLARE_DDNS_IP6_PROVIDER}
+            - PROXIED=${CLOUDFLARE_DDNS_PROXIED}
         networks:
             caddy-net:
                 ipv4_address: 172.28.240.6
