@@ -48,14 +48,18 @@ services:
                 ipv4_address: 172.28.241.4
 
     cloudflare_ddns:
-        image: oznu/cloudflare-ddns:latest
-        container_name: cloudlfare_ddns
+        image: favonia/cloudflare-ddns:latest
+        container_name: cloudflare_ddns
         restart: always
+        cap_drop:
+            - all
+        read_only: true
+        security_opt:
+            - no-new-privileges:true
         environment:
-            API_KEY: "${CLOUDFLARE_DDNS_API_KEY}"
-            ZONE: "${CLOUDFLARE_DDNS_ZONE}"
-            SUBDOMAIN: "${CLOUDFLARE_DDNS_DOMAIN}"
-            PROXIED: "false"
+            - CF_API_TOKEN=${CLOUDFLARE_DDNS_API_KEY}
+            - DOMAINS=${CLOUDFLARE_DDNS_DOMAIN}
+            - PROXIED=false
         networks:
             caddy-net:
                 ipv4_address: 172.28.240.6
