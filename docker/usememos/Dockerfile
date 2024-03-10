@@ -1,7 +1,7 @@
 # Frontend
 FROM node:21-alpine AS frontend
 
-ENV MEMOS_VERSION=0.19.1
+ENV MEMOS_VERSION=0.20.1
 
 WORKDIR /frontend
 
@@ -12,7 +12,7 @@ RUN apk --no-cache add curl \
     && cd /frontend/memos/web/src/locales \
     && find . -name '*.json' ! -name 'en.json' ! -name 'zh-*.json' | xargs -I '%%' sh -c 'echo "{}" > %%' \
     && cd /frontend/memos/web/src \
-    && awk 'BEGIN {RS=""}{gsub(/[ ]{2}"([a-z]{2})(\-BR)?",\n/,"")}1' i18n.ts > i18n.tmp.ts \
+    && awk 'BEGIN {RS=""}{gsub(/[ ]{2}"([a-z]{2})(\-(GB|BR))?",\n/,"")}1' i18n.ts > i18n.tmp.ts \
     && sed -r 's/([ ]{2})"zh-Hans",/\1"en","zh-Hans",/' i18n.tmp.ts > i18n.ts \
     && rm -rf i18n.tmp.ts \
     && cd /frontend/memos/web \
@@ -21,7 +21,7 @@ RUN apk --no-cache add curl \
     && rm -rf /frontend/memos.tar.gz
 
 # Backend
-FROM golang:1.21-alpine AS backend
+FROM golang:1.22-alpine AS backend
 
 WORKDIR /backend
 
@@ -29,7 +29,7 @@ COPY --from=frontend /frontend/memos /backend/memos
 
 RUN apk --no-cache add gcc g++ \
     && cd /backend/memos \
-    && CGO_ENABLED=1 go build -o memos ./bin/memos/main.go
+    && CGO_ENABLED=0 go build -o memos ./bin/memos/main.go
 
 # Production
 FROM alpine:latest AS memos
@@ -48,4 +48,4 @@ VOLUME /var/opt/memos
 
 EXPOSE 5230
 
-ENTRYPOINT ["./memos", "--mode=prod", "--port=5230", "--data=/var/opt/memos", "--metric=false"]
+ENTRYPOINT ["./memos", "--mode=prod", "--port=5230", "--data=/var/opt/memos"]
