@@ -16,7 +16,7 @@ RUN apk --no-cache add curl \
     && sed -r 's/([ ]{2})"zh-Hans",/\1"en","zh-Hans",/' i18n.tmp.ts > i18n.ts \
     && rm -rf i18n.tmp.ts \
     && cd /frontend/memos/web \
-    && corepack enable && pnpm i --frozen-lockfile && pnpm type-gen \
+    && corepack enable && pnpm i --frozen-lockfile \
     && pnpm build \
     && rm -rf /frontend/memos.tar.gz
 
