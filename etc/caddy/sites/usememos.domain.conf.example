@@ -1,6 +1,8 @@
 usememos.domain {
     import tls_issuer_resolver_cloudflare
 
+    encode gzip
+
     reverse_proxy usememos:5230 {
         import reverse_proxy_trusted_cloudflare
         import cache_static_assets
